@@ -1,0 +1,42 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET Framework (MSBuild)
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build x86
+        run: |
+          msbuild BkavRemover.sln /p:Configuration=Release /p:Platform=x86 /nologo /v:minimal
+
+      - name: Build x64
+        run: |
+          msbuild BkavRemover.sln /p:Configuration=Release /p:Platform=x64 /nologo /v:minimal
+
+      - name: Collect artifacts
+        run: |
+          New-Item -ItemType Directory -Force -Path dist\x86, dist\x64 | Out-Null
+          Copy-Item src\BkavRemover.UI\bin\x86\Release\BkavProRemover.exe dist\x86\BkavProRemover-x86.exe
+          Copy-Item src\BkavRemover.UI\bin\x64\Release\BkavProRemover.exe dist\x64\BkavProRemover-x64.exe
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/x86/BkavProRemover-x86.exe
+            dist/x64/BkavProRemover-x64.exe
+          generate_release_notes: true
+          draft: false

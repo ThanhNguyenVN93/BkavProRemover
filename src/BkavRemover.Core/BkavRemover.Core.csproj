@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A1B2C3D4-0001-4A5B-8C6D-000000000001}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BkavRemover.Core</RootNamespace>
+    <AssemblyName>BkavRemover.Core</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' Or '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' Or '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Management" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Findings.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Native\ProcessRunner.cs" />
+    <Compile Include="Native\Kernel32.cs" />
+    <Compile Include="Native\ServiceDeleter.cs" />
+    <Compile Include="Native\PathSafety.cs" />
+    <Compile Include="Native\PrivilegeHelper.cs" />
+    <Compile Include="AutomationState.cs" />
+    <Compile Include="AutoStartHelper.cs" />
+    <Compile Include="SystemActions.cs" />
+    <Compile Include="ElevationHelper.cs" />
+    <Compile Include="SafeModeHelper.cs" />
+    <Compile Include="Scanning\PathCatalog.cs" />
+    <Compile Include="Scanning\ServiceScanner.cs" />
+    <Compile Include="Scanning\ProcessScanner.cs" />
+    <Compile Include="Scanning\ScheduledTaskScanner.cs" />
+    <Compile Include="Scanning\RegistryScanner.cs" />
+    <Compile Include="Scanning\ScanEngine.cs" />
+    <Compile Include="Cleaning\FileCleaner.cs" />
+    <Compile Include="Cleaning\ServiceCleaner.cs" />
+    <Compile Include="Cleaning\ProcessCleaner.cs" />
+    <Compile Include="Cleaning\ScheduledTaskCleaner.cs" />
+    <Compile Include="Cleaning\RegistryCleaner.cs" />
+    <Compile Include="Cleaning\RemovalOrchestrator.cs" />
+    <Compile Include="AppSettings.cs" />
+    <Compile Include="Reporting\BugReportBuilder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
